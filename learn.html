@@ -1,0 +1,365 @@
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darlly learn-Plateforme Educative Nationale du Cameroun</title>
+    <style>
+       /* STYLE GENERAL & COULEURS DU CAMEROUN */
+       :root{
+        --vert-cameroun:#007A5E;
+        --rouge-cameroun:#CE1126;
+        --jaune-cameroun:#FCD116;
+        --gris-fonce:#2D3748;
+        --gris-clair:#F7FAFC;
+       } 
+       *{
+        box-sizing:border-box ;
+        margin:0;
+        padding: 0;
+        font-family:'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       }
+       body{
+        background-color: var(--gris-clair);
+        color: var(--gris-fonce);
+        line-height: 1.6;
+       } 
+       header{
+        background-color: var(--vert-cameroun);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 5px solid var(--rouge-cameroun);
+        position: relative;
+       }
+       header h1{
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+       }
+       /*Etoile du drapeau*/
+       header::after{
+        content: ⭐;
+        color: var(--jaune-cameroun);
+        font-size: 1.5rem;
+        display: block;
+        margin-top: 5px;
+       }
+       .container{
+        max-width: 800px;
+        max-width: 20px auto;
+        padding: 15px;
+       }
+       .instructions{
+        background: #F7FAFC;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left:4px solid var(--jaune-cameroun) ;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+       }
+       /*--FILTRES DE NIVEAU--*/
+       .level-tabs{
+        display: flex;
+        gap: 10px;
+        margin-bottom: 2Opx;
+       }
+       .tab-btn{
+        flex: 1;
+        padding: 12px;
+        border: none;
+        background-color: aquamarine;
+        color: var(--gris-fonce);
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        font-size: 0.9rem;
+       }
+       .tab-btn.active{
+        background-color: var(--vert-cameroun);
+        color: #F7FAFC;
+       }
+       /*---LISTE DES COURS---*/
+       .courses-list{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+       }
+       .course-card{
+        background: #F7FAFC;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #E2E8F0;
+       }
+       .course-info h3{
+        color: var(--vert-cameroun);
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+       }
+       .course-info p{
+        font-size: 0.85rem;
+        color: violet;
+       }
+       .badge-source{
+        display: inline-block;
+        background: #E2E8F0;
+        color: var(--gris-fonce);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        margin-top: 5px;
+       }
+       /*---BOUTONS*/
+        .btn-action {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .btn-download {
+            background-color: var(--jaune-cameroun);
+            color: #000;
+        }
+
+        .btn-download:hover {
+            background-color: #e5bd12;
+        }
+
+        .btn-read {
+            background-color: #4A5568;
+            color: white;
+        }
+
+        /* --- ZONE DE REVISION HORSLIGNE --- */
+        .reader-section {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .reader-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 10px;
+        }
+
+        .btn-close {
+            background: var(--rouge-cameroun);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .course-content {
+            background: #F7FAFC;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #EDF2F7;
+            min-height: 200px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #718096;
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Darlly learn</h1>
+        <p>Réviser vos cours — Du Primaire à l'Université</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="instructions">
+            <strong>💡 Mode d'emploi :</strong> Connectez-vous en ville pour cliquer sur <strong>"Télécharger"</strong>. Une fois le cours enregistré, vous pourrez cliquer sur <strong>"Lire (Hors-ligne)"</strong> chez vous, même sans aucune connexion Internet !
+        </div>
+
+        <!-- Onglets de Navigation par Niveau -->
+        <div class="level-tabs">
+            <button class="tab-btn" onclick="filterLevel('tous')">📚 Tous</button>
+            <button class="tab-btn active" onclick="filterLevel('primaire')">🇨🇲 Primaire</button>
+            <button class="tab-btn" onclick="filterLevel('secondaire')">🇨🇲 Secondaire</button>
+            <button class="tab-btn" onclick="filterLevel('universite')">🇨🇲 Université</button>
+        </div>
+        <select id="subjectFilter" onchange="renderCourses(niveauActuel)"></select>
+        <!-- Liste Dynamique des Cours -->
+        <div class="courses-list" id="coursesContainer">
+            <!-- Les cours s'afficheront ici grâce au JavaScript -->
+        </div>
+
+        <!-- Zone de Lecture du Cours (Simulateur Hors-ligne) -->
+        <div class="reader-section" id="readerSection">
+            <div class="reader-header">
+                <h2 id="readerTitle">Titre du Cours</h2>
+                <button class="btn-close" onclick="closeReader()">Fermer x</button>
+            </div>
+            <div class="course-content" id="readerBody">
+                <!-- Le contenu textuel ou résumé du cours s'affiche ici -->
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Darlly learn. Contenus synchronisés à partir des serveurs du MINEDUB, MINESEC & MINESUP.</p>
+    </footer>
+
+    <script>
+        // --- BASE DE DONNÉES SIMULÉE (Tirée des plateformes en ligne) ---
+        const database = [
+            // PRIMAIRE
+            {
+                id: "prim_math_01",
+                level: "primaire",
+                class: "CM2 / Class 6",
+                subject: "Mathématiques",
+                title: "Les fractions et les partages proportionnels",
+                source: "Plateforme MINEDUB",
+                content: "<h3>I. Règle Générale</h3><p>Pour additionner deux fractions de même dénominateur, on additionne les numérateurs et on garde le dénominateur commun.</p><h3>II. Exercice d'application officiel</h3><p>Calculer : 2/5 + 1/5 = 3/5.</p>"
+            },
+            {
+                id: "prim_fr_01",
+                level: "primaire",
+                class: "CM2",
+                subject: "Grammaire Française",
+                title: "L'accord du participe passé",
+                source: "E-learning MINEDUB",
+                content: "<h3>Règle de base :</h3><p>Le participe passé employé avec l'auxiliaire 'être' s'accorde en genre et en nombre avec le sujet du verbe.<br>Exemple : Les filles sont parti<strong>es</strong> à l'école.</p>"
+            },
+            // SECONDAIRE
+            {
+                id: "sec_hist_01",
+                level: "secondaire",
+                class: "Classe de Terminale",
+                subject: "Histoire",
+                title: "Le Cameroun de 1916 à 1960 : Le mandat et la tutelle",
+                source: "Serveur MINESEC Distance",
+                content: "<h3>1. Le partage du Cameroun</h3><p>Après la défaite allemande en 1916, le Cameroun est partagé entre la France (4/5) et la Grande-Bretagne (1/5).</p><h3>2. L'évolution vers l'indépendance</h3><p>Le Cameroun oriental obtient son indépendance le 1er janvier 1960 sous la présidence d'Ahmadou Ahidjo.</p>"
+            },
+            // UNIVERSITÉ
+            {
+                id: "univ_info_01",
+                level: "universite",
+                class: "Licence 1 (UY1 / Université de Douala)",
+                subject: "Algorithmique & Python",
+                title: "Introduction aux structures de données conditionnelles",
+                source: "Moodle Inter-Universitaire",
+                content: "<h3>Concepts Clés :</h3><p>En programmation, l'instruction <code>if...else</code> permet d'exécuter des blocs de code différents selon qu'une condition est vraie ou fausse.</p><h3>Exemple en Python :</h3><pre>age = 18\nif age >= 18:\n    print('Éligible au vote au Cameroun')</pre>"
+            }
+        ];
+        const PREFIXE = 'darlly_cours_';
+let niveauActuel = 'tous';
+
+function lireCoursLocal(id) {
+  try {
+    const brut = localStorage.getItem(PREFIXE + id);
+    return brut ? JSON.parse(brut) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function afficherMessage(texte) {
+  alert(texte);
+}
+function remplirMatieres(niveau) {
+  const sel = document.getElementById('subjectFilter');
+  if (!sel) return;
+  const matieres = [...new Set(
+    database.filter(c => niveau === 'tous' || c.level === niveau).map(c => c.subject)
+  )];
+  sel.innerHTML = '<option value="">Toutes les matières</option>' +
+    matieres.map(m => '<option>' + m + '</option>').join('');
+}
+
+function renderCourses(niveau) {
+  const container = document.getElementById('coursesContainer');
+  const sel = document.getElementById('subjectFilter');
+  const matiere = sel ? sel.value : '';
+  const liste = database.filter(c =>
+    (niveau === 'tous' || c.level === niveau) && (!matiere || c.subject === matiere));
+
+  if (!liste.length) {
+    container.innerHTML = '<p>Aucun cours pour ce choix.</p>';
+    return;
+  }
+  container.innerHTML = liste.map(c =>
+    '<div class="course-card">' +
+      '<h3>' + c.title + '</h3>' +
+      '<p>' + c.subject + ' — ' + c.class + '</p>' +
+      '<button onclick="downloadCourse(\'' + c.id + '\')">' +
+        (lireCoursLocal(c.id) ? 'Téléchargé ✔️' : 'Télécharger') + '</button>' +
+      '<button onclick="readCourse(\'' + c.id + '\')">Lire (Hors-ligne)</button>' +
+    '</div>'
+  ).join('');
+}
+
+function filterLevel(niveau) {
+  niveauActuel = niveau;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    const cible = b.getAttribute('onclick') || '';
+    b.classList.toggle('active', cible.includes("'" + niveau + "'"));
+  });
+  remplirMatieres(niveau);
+  renderCourses(niveau);
+}
+
+function downloadCourse(id) {
+  const course = database.find(item => item.id === id);
+  if (!course) return;
+  try {
+    localStorage.setItem(PREFIXE + id, JSON.stringify(course));
+    afficherMessage('Cours enregistré. Vous pouvez le lire sans Internet.');
+  } catch (e) {
+    afficherMessage("Enregistrement impossible : la mémoire du navigateur est pleine.");
+  }
+  renderCourses(niveauActuel);
+}
+
+function readCourse(id) {
+  const course = lireCoursLocal(id);
+  if (!course) {
+    afficherMessage("Téléchargez d'abord ce cours.");
+    return;
+  }
+  document.getElementById('readerTitle').textContent = course.title;
+  document.getElementById('readerBody').innerHTML = course.content;
+  const section = document.getElementById('readerSection');
+  section.style.display = 'block';
+  section.scrollIntoView({ behavior: 'smooth' });
+}
+
+filterLevel('tous');
+        </script>
+<script src="programme.js"></script>
+<script src="primaire.js"></script>
+<script src="primaire2.js"></script>
+<script src="secondaire.js"></script>
+<script src="universite.js"></script>
+    </body>
+</html>              
+    
